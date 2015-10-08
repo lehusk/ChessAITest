@@ -21,7 +21,7 @@ namespace ChTest.BoardLogic
         {
             var game = new Game();
             
-            game.Players = new List<Player> { new Player(GameSide.White), new Player(GameSide.Black) };
+            game.Players = new List<Player> { new Player(GameSide.White), new Player(GameSide.Black, true) };
             game.Board = _boardBuilder.CreateNewBoard();
             return game;
         }

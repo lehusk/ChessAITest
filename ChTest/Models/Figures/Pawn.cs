@@ -10,6 +10,15 @@ namespace ChTest.Models.Figures
             
         }
 
+        public new bool ShouldConvert(Move move)
+        {
+            if (Side == GameSide.Black && move.To.Column == 1)
+                return true;
+            if (Side == GameSide.White && move.To.Column == 8)
+                return true;
+            return false;
+        }
+
         public override List<FieldLocation> GetFieldsICanMoveTo()
         {
             var attackingFields = new List<FieldLocation>();

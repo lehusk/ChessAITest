@@ -37,6 +37,13 @@ namespace ChTest.Models
             To = new FieldLocation(rowTo, colTo);
         }
 
+        public Move(FieldLocation from, FieldLocation to, GameSide gameSide)
+        {
+            From = new FieldLocation(from.Row, from.Column);
+            To = new FieldLocation(to.Row, to.Column);
+            Side = gameSide;
+        }
+
         public FieldLocation From { get; set; }
         public FieldLocation To { get; set; }
         public GameSide Side { get; set; }
@@ -84,6 +91,17 @@ namespace ChTest.Models
         {
             var figureOnFrom = GetFigureOnLocation(move.From);
             return figureOnFrom != null && figureOnFrom.Side == move.Side;
+        }
+
+        public void CaptureFigure(Figure existingFigure)
+        {
+            Figures.Remove(existingFigure);
+        }
+
+        public void ConvertFigure(Figure figureToMove, Move move)
+        {
+            Figures.Remove(figureToMove);
+            Figures.Add(new Queen(move.Side, move.To.Column, move.To.Row));
         }
     }
 

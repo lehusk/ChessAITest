@@ -20,6 +20,16 @@ namespace ChTest.Models.Figures
         {
             return GetFieldsICanMoveTo().Contains(to);
         }
+
+        public bool ShouldConvert(Move move)
+        {
+            return false;
+        }
+
+        public void Move(Move move)
+        {
+            Location = move.To;
+        }
     }
 
     internal interface ICanMove

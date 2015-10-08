@@ -17,6 +17,7 @@ namespace ChTest
             For<IMoveGenerator>().Use<MoveGenerator>();
             For<IUserMoveReader>().Use<UserMoveReader>();
             For<IMoveValidator>().Use<MoveValidator>();
+            For<IMoveSelector>().Use<MoveSelector>();
         }
     }
 }

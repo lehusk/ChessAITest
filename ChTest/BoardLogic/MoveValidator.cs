@@ -12,6 +12,12 @@ namespace ChTest.BoardLogic
     {
         public bool MoveIsValid(Move move, Board board)
         {
+            if (move == null)
+            {
+                Console.WriteLine("parse failed");
+                return false;
+            }
+
             if (!board.IsInBoard(move))
             {
                 Console.WriteLine("move not on board");
@@ -49,7 +55,8 @@ namespace ChTest.BoardLogic
 
         private bool MoveWouldCauseCheckOnSelf(Move move, Board board)
         {
-            throw new NotImplementedException();
+            /// TODO
+            return false;
         }
     }
 }

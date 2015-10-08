@@ -7,7 +7,7 @@ namespace ChTest.BoardLogic
     internal interface IMoveHandler
     {
         Move GetNextMove(Game game);
-        MoveResult HandleMove(Game game);
+        MoveResult HandleMove(Game game, Move move);
     }
 
     internal enum MoveResult
@@ -22,12 +22,14 @@ namespace ChTest.BoardLogic
         private readonly IMoveGenerator _moveGenerator;
         private readonly IUserMoveReader _userMoveReader;
         private readonly IMoveValidator _moveValidator;
+        private readonly IBoardHandler _boardHandler;
 
-        public MoveHandler(IMoveGenerator moveGenerator, IUserMoveReader userMoveReader, IMoveValidator moveValidator)
+        public MoveHandler(IMoveGenerator moveGenerator, IUserMoveReader userMoveReader, IMoveValidator moveValidator, IBoardHandler boardHandler)
         {
             _moveGenerator = moveGenerator;
             _userMoveReader = userMoveReader;
             _moveValidator = moveValidator;
+            _boardHandler = boardHandler;
         }
 
         public Move GetNextMove(Game game)
@@ -37,7 +39,7 @@ namespace ChTest.BoardLogic
 
             if (player.IsAIPlayer)
             {
-                move = _moveGenerator.GenerateMove(game);
+                move = _moveGenerator.GenerateMove(game, player.GameSide);
             }
             else
             {
@@ -53,9 +55,36 @@ namespace ChTest.BoardLogic
             return move;
         }
 
-        public MoveResult HandleMove(Game game)
+        public MoveResult HandleMove(Game game, Move move)
         {
-            throw new System.NotImplementedException();
+            var existingFigure = game.Board.GetFigureOnLocation(move.To);
+            if (existingFigure != null)
+                game.Board.CaptureFigure(existingFigure);
+
+            var figureToMove = game.Board.GetFigureOnLocation(move.From);
+            if (figureToMove.ShouldConvert(move))
+            {
+                game.Board.ConvertFigure(figureToMove, move);
+            }
+            else
+            {
+                figureToMove.Move(move);
+            }
+
+            return GetMoveResult(game.Board, move.Side);
+        }
+
+        private MoveResult GetMoveResult(Board board, GameSide side)
+        {
+            if (_boardHandler.IsCheck(board, side))
+            {
+                if (_boardHandler.IsMate(board, side))
+                {
+                    return MoveResult.Mate;
+                }
+                return MoveResult.Check;
+            }
+            return MoveResult.NormalMove;
         }
     }
 }

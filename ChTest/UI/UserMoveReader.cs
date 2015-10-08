@@ -21,10 +21,10 @@ namespace ChTest.UI
         {
             if (input.Length != 5)
                 return null;
-            var rowFrom = input[0] - 'a' + 1;
-            var colFrom = input[1] - '1' + 1;
-            var rowTo = input[2] - 'a' + 1;
-            var colTo = input[3] - '1' + 1;
+            var colFrom = input[0] - 'a' + 1;
+            var rowFrom = input[1] - '1' + 1;
+            var colTo = input[3] - 'a' + 1;
+            var rowTo = input[4] - '1' + 1;
 
             return new Move(rowFrom, colFrom, rowTo, colTo, gameSide);
         }

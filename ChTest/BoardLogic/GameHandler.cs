@@ -30,7 +30,8 @@ namespace ChTest.BoardLogic
             while (true)
             {
                 var move = _moveHandler.GetNextMove(Game);
-                _moveHandler.HandleMove(Game);
+                _moveHandler.HandleMove(Game, move);
+                _boardHandler.Draw(Game.Board);
             }
         }
     }
