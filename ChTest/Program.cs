@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ChTest.BoardLogic;
+using StructureMap;
 
 namespace ChTest
 {
@@ -6,40 +7,12 @@ namespace ChTest
     {
         static void Main(string[] args)
         {
-            var game = new Game();
+            ObjectFactory.Configure(x => x.AddRegistry<ChTestRegistry>());
+
+            var gameHandler = ObjectFactory.GetInstance<IGameHandler>();
+
+            // get and generate moves + draw board
+            gameHandler.StartGame();
         }
-    }
-
-    internal class Player
-    {
-        public GameSide GameSide { get; set; }
-
-        public Player(GameSide gameSide)
-        {
-            GameSide = gameSide;
-        }
-    }
-
-    internal class Move
-    {
-        public FieldLocation From { get; set; }
-        public FieldLocation To { get; set; }
-    }
-
-    internal class FieldLocation
-    {
-        public int Row { get; set; }
-        public int Column { get; set; }
-    }
-
-    internal enum GameSide
-    {
-        White,
-        Black
-    }
-
-    internal class Board
-    {
-        public List<Field> Fields { get; set; } 
     }
 }

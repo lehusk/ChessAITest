@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.3.1.6.186\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>..\packages\structuremap.3.1.6.186\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,12 +47,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game.cs" />
+    <Compile Include="AI\MoveGenerator.cs" />
+    <Compile Include="BoardLogic\BoardHandler.cs" />
+    <Compile Include="BoardLogic\GameBuilder.cs" />
+    <Compile Include="BoardLogic\GameHandler.cs" />
+    <Compile Include="BoardLogic\IBoardBuilder.cs" />
+    <Compile Include="BoardLogic\IMoveHandler.cs" />
+    <Compile Include="BoardLogic\MoveValidator.cs" />
+    <Compile Include="ChTestRegistry.cs" />
+    <Compile Include="Models\FieldLocation.cs" />
+    <Compile Include="Models\Figures\Bishop.cs" />
+    <Compile Include="Models\Figures\Figure.cs" />
+    <Compile Include="Models\Figures\King.cs" />
+    <Compile Include="Models\Figures\Knight.cs" />
+    <Compile Include="Models\Figures\Pawn.cs" />
+    <Compile Include="Models\Figures\Queen.cs" />
+    <Compile Include="Models\Figures\Rook.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GameSide.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\UserMoveReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
