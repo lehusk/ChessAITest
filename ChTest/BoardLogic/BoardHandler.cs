@@ -14,11 +14,25 @@ namespace ChTest.BoardLogic
     {
         public void Draw(Board board)
         {
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine();
+            Console.WriteLine("  a  b  c  d  e  f  g  h");
+            Console.WriteLine();
+
             for (var row = 8; row >= 1; row--)
             {
+
                 //var line = "";
+                
                 for (var att = 0; att <= 1; att++)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    
+                    if (att == 0) Console.Write("  ");
+                    else Console.Write(row + " ");
+
                     for (var col = 1; col <= 8; col++)
                     {
                         var figure = board.GetFigureOnLocation(new FieldLocation(row, col));
@@ -38,6 +52,10 @@ namespace ChTest.BoardLogic
                 }
                 Console.WriteLine();
             }
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine();
+            Console.WriteLine("  a  b  c  d  e  f  g  h");
         }
 
         public bool IsCheck(Board board, GameSide side)

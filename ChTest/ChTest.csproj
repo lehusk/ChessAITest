@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\MoveEvaluator.cs" />
     <Compile Include="AI\MoveGenerator.cs" />
     <Compile Include="AI\MoveSelector.cs" />
     <Compile Include="BoardLogic\BoardHandler.cs" />
